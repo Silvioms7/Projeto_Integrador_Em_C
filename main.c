@@ -27,10 +27,12 @@ void main ()
         map[4][1]
 
         Cura:
+        + 20 de vida
         map[2][2]
 
         Bomba:
-        map[0][4]
+        - 35 de vida
+        map[0][4] 
         map[1][1]
         map[2][4]
         map[3][2]
