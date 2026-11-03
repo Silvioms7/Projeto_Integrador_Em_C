@@ -7,6 +7,7 @@ void main ()
     int coluna = 0;   
     int life  = 100;
     int mov = 0;
+    int opcao = 0;
     int i;
     int j;
     int posicao[5][5];
