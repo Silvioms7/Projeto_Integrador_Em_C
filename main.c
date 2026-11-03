@@ -6,7 +6,6 @@ void main ()
     int linha = 0;
     int coluna = 0;   
     int life  = 100;
-    int opcao = 0;
     int mov = 0;
     int i;
     int j;
@@ -149,43 +148,88 @@ void main ()
             default:
                 printf("Opção inválida!\n");
         }
-        if (linha == 0 && coluna == 2 && map[0][2] == 1) 
+
+        if(map[linha][coluna] == 1){
+        if (linha == 0 && coluna == 2) 
         {
             estatisticas[1] += 1;
             map[0][2] = 0;
         }
         else
         {
-            if (linha == 1 && coluna == 3 && map[1][3] == 1)
+            if (linha == 1 && coluna == 3)
             {
                estatisticas[1] += 1; 
                map[1][3] = 0;
             }
             else
             {
-                if (linha == 2 && coluna == 0 && map[2][0] == 1)
+                if (linha == 2 && coluna == 0)
                 {
                     estatisticas[1] += 1;
                     map[2][0] = 0;
                 }
                 else
                 {
-                    if (linha == 3 && coluna == 3 && map[3][3] == 1)
+                    if (linha == 3 && coluna == 3)
                     {
                         estatisticas[1] += 1;
                         map[3][3] = 0;
                     }
                     else
                     {
-                        if (linha == 4 && coluna == 1 && map[4][1] == 1)
+                        if (linha == 4 && coluna == 1 &&)
                         {
                             estatisticas[1] += 1;
-                            map[4][1];
+                            map[4][1] = 0;
                         }
                     }
                 }
             }
         }
+    }
+        if (map[linha][coluna] == 2)
+        {
+            if (linha == 0 && coluna == 4) 
+        {
+            life -= 35;
+            estatisticas[2] += 1;
+            map[0][4] = 0;
+        }
+        else
+        {
+            if (linha == 1 && coluna == 1)
+            {
+                life -= 35;
+                estatisticas[2] += 1;
+                map[1][1] = 0;
+            }
+            else
+            {
+                if (linha == 2 && coluna == 4)
+                {
+                    life -= 35;
+                    estatisticas[2] += 1;
+                    map[2][4] = 0;
+                }
+                else
+                {
+                    if (linha == 3 && coluna == 2)
+                    {
+                        life -= 35;
+                        estatisticas[2] += 1;
+                        map[3][2] = 0;
+                    }
+                }
+            }
+        }
+    }
+    if (life <= 0)
+    {
+        printf("Game Over!");
+        life = 0;
+        break;
+    }
     }while(true);
 
     printf("Vida: %d\n", life);
