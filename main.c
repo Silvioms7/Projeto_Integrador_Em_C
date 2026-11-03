@@ -179,7 +179,7 @@ void main ()
                     }
                     else
                     {
-                        if (linha == 4 && coluna == 1 &&)
+                        if (linha == 4 && coluna == 1)
                         {
                             estatisticas[1] += 1;
                             map[4][1] = 0;
