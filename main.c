@@ -6,6 +6,7 @@ void main ()
     int linha = 0;
     int coluna = 0;   
     int life  = 100;
+    int dano =0;
     int mov = 0;
     int opcao = 0;
     int i;
@@ -46,7 +47,7 @@ void main ()
 
     // estatisticas[0] -> quantidade de movimentos
     // estatisticas[1] -> quantidade de ouros encontrados
-    // estatisticas[2] -> quantidade de inimigos encontrados
+    // estatisticas[2] -> quantidade de bombas encontradas
     
     do{
         printf("\n");
@@ -127,7 +128,7 @@ void main ()
                 printf("Vida: %d\n", life);
                 printf("Movimentos realizados: %d\n", estatisticas[0]);
                 printf("Ouros encontrados: %d\n", estatisticas[1]);
-                printf("Inimigos encontrados: %d\n", estatisticas[2]);
+                printf("Bombas encontradas: %d\n", estatisticas[2]);
                 break;
             case 3:
                 for (i = 0; i < 5; i++)
@@ -194,6 +195,7 @@ void main ()
             if (linha == 0 && coluna == 4) 
         {
             life -= 35;
+            dano += 35;
             estatisticas[2] += 1;
             map[0][4] = 0;
         }
@@ -202,6 +204,7 @@ void main ()
             if (linha == 1 && coluna == 1)
             {
                 life -= 35;
+                dano += 35;
                 estatisticas[2] += 1;
                 map[1][1] = 0;
             }
@@ -210,6 +213,7 @@ void main ()
                 if (linha == 2 && coluna == 4)
                 {
                     life -= 35;
+                    dano += 35;
                     estatisticas[2] += 1;
                     map[2][4] = 0;
                 }
@@ -218,11 +222,31 @@ void main ()
                     if (linha == 3 && coluna == 2)
                     {
                         life -= 35;
+                        dano += 35;
                         estatisticas[2] += 1;
                         map[3][2] = 0;
                     }
                 }
             }
+        }
+        if (map[linha][coluna]==3)
+        {
+            printf("==============================\n");
+            printf("   PARABÉNS VOCẼ VENCEU!!!\n");
+            printf("==============================\n");
+
+
+            print("Quantidade de passos dados:%d\n", estatisticas[0]);
+            printf("Quantidade de ouro pego:%d\n", estatisticas[1]);
+            printf("Quantidade de dano sofrido:%d\n", dano);
+            printf("Quantidade de bombas encontradas:%d\n", estatisticas[2]);
+            
+            printf("Voltar ao menu\n");
+            getchar();
+            getchar();
+
+            map[linha][coluna] = 0;
+            continue;
         }
     }
     if (life <= 0)
@@ -236,5 +260,5 @@ void main ()
     printf("Vida: %d\n", life);
     printf("Movimentos realizados: %d\n", estatisticas[0]);
     printf("Ouros encontrados: %d\n", estatisticas[1]);
-    printf("Inimigos encontrados: %d\n", estatisticas[2]);
+    printf("Bombas encontradas: %d\n", estatisticas[2]);
 }
