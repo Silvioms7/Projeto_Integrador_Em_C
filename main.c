@@ -19,6 +19,7 @@ void main ()
         {0, 0, 2, 1, 0},
         {0, 1, 0, 0, 3}
 
+
         /*
         Ouro:
         map[0][2]
@@ -42,12 +43,21 @@ void main ()
         map[4][4]
         */
     };
+    int map_default[5][5];
 
     int estatisticas[3] = {0, 0, 0};
 
     // estatisticas[0] -> quantidade de movimentos
     // estatisticas[1] -> quantidade de ouros encontrados
     // estatisticas[2] -> quantidade de bombas encontradas
+
+    for (i = 0; i < 5; i++)
+    {
+        for (j = 0; j < 5; j++)
+        {
+            map_default[i][j] = map[i][j];
+        }
+    }
     
     do{
         printf("\n");
@@ -151,7 +161,8 @@ void main ()
                 printf("Opção inválida!\n");
         }
 
-        if(map[linha][coluna] == 1){
+        if(map[linha][coluna] == 1)
+        {
         if (linha == 0 && coluna == 2) 
         {
             estatisticas[1] += 1;
@@ -229,36 +240,84 @@ void main ()
                 }
             }
         }
-        if (map[linha][coluna]==3)
+        
+    }
+    if (map[linha][coluna]==3)
         {
             printf("==============================\n");
             printf("   PARABÉNS VOCẼ VENCEU!!!\n");
             printf("==============================\n");
 
 
-            print("Quantidade de passos dados:%d\n", estatisticas[0]);
+            printf("Quantidade de passos dados:%d\n", estatisticas[0]);
             printf("Quantidade de ouro pego:%d\n", estatisticas[1]);
             printf("Quantidade de dano sofrido:%d\n", dano);
             printf("Quantidade de bombas encontradas:%d\n", estatisticas[2]);
             
-            printf("Voltar ao menu\n");
+            printf("Pressione enter para voltar ao menu\n");
             getchar();
             getchar();
 
-            map[linha][coluna] = 0;
+            //Restaurar mapa
+            for (i = 0; i<5; i++)
+            {
+                for (j = 0; j<5; j++)
+                {
+                    map[i][j] = map_default[i][j];    
+                }
+            }
+
+        //Restaurar posição do jogador
+        linha = 0;
+        coluna = 0;
+
+        // Restaurar Vida
+        life=100;
+
+        //Restaurar a Variavel de dano recebido
+        dano=0;
+
+        //Restauras estatisticas
+        estatisticas[0]=0;
+        estatisticas[1]=0;
+        estatisticas[2]=0;
             continue;
         }
-    }
     if (life <= 0)
     {
-        printf("Game Over!");
         life = 0;
-        break;
+        printf("===============================\n");
+        printf("          Game Over!\n");
+        printf("===============================\n");
+        printf("Quantidade de passos dados:%d\n", estatisticas[0]);
+        printf("Quantidade de ouro pego:%d\n", estatisticas[1]);
+        printf("Quantidade de dano sofrido:%d\n", dano);
+        printf("Quantidade de bombas encontradas:%d\n", estatisticas[2]);
+            
+        printf("Voltar ao menu\n");
+        getchar();
+        getchar();
+
+        for (i = 0; i<5; i++)
+            {
+                for (j = 0; j<5; j++)
+                {
+                   map[i][j] = map_default[i][j];    
+                }
+            }
+
+        linha = 0;
+        coluna = 0;
+
+        life=100;
+
+        dano=0;
+
+        estatisticas[0]=0;
+        estatisticas[1]=0;
+        estatisticas[2]=0;
+            continue;
+
     }
     }while(true);
-
-    printf("Vida: %d\n", life);
-    printf("Movimentos realizados: %d\n", estatisticas[0]);
-    printf("Ouros encontrados: %d\n", estatisticas[1]);
-    printf("Bombas encontradas: %d\n", estatisticas[2]);
 }
