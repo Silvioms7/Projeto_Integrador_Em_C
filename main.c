@@ -5,14 +5,14 @@ void main ()
 {
     int linha = 0;
     int coluna = 0;   
-    int life  = 100;
+    int vida  = 100;
     int dano =0;
     int mov = 0;
     int opcao = 0;
     int i;
     int j;
     int posicao[5][5];
-    int map[5][5]  = {
+    int mapa[5][5]  = {
         {0, 0, 1, 0, 2},
         {0, 2, 0, 1, 0},
         {1, 0, 4, 0, 2}, // 0 = espaco vazio, 1 = ouro, 2 = bomba, 3 = saida, 4 = cura
@@ -22,28 +22,28 @@ void main ()
 
         /*
         Ouro:
-        map[0][2]
-        map[1][3]
-        map[2][0]
-        map[3][3]
-        map[4][1]
+        mapa[0][2]
+        mapa[1][3]
+        mapa[2][0]
+        mapa[3][3]
+        mapa[4][1]
 
         Cura:
         + 20 de vida
-        map[2][2]
+        mapa[2][2]
 
         Bomba:
         - 35 de vida
-        map[0][4] 
-        map[1][1]
-        map[2][4]
-        map[3][2]
+        mapa[0][4] 
+        mapa[1][1]
+        mapa[2][4]
+        mapa[3][2]
         
         Saida:
-        map[4][4]
+        mapa[4][4]
         */
     };
-    int map_default[5][5];
+    int mapa_default[5][5];
 
     int estatisticas[3] = {0, 0, 0};
 
@@ -55,18 +55,18 @@ void main ()
     {
         for (j = 0; j < 5; j++)
         {
-            map_default[i][j] = map[i][j];
+            mapa_default[i][j] = mapa[i][j];
         }
     }
     
     do{
         printf("\n");
         printf("==============================\n");
-        printf("AVENTURA NA MATRIZ\n");
+        printf("     AVENTURA NA MATRIZ\n");
         printf("==============================\n");
         printf("1 - Movimentar personagem\n");
         printf("2 - Consultar status\n");
-        printf("3 - Mostrar mapa\n");
+        printf("3 - Mostrar mapaa\n");
         printf("4 - Encerrar jogo\n");
         printf("\nEscolha uma opcao: ");
         scanf("%d", &opcao);
@@ -89,6 +89,15 @@ void main ()
                 scanf("%d", &mov);
                 if (((mov == 1 || mov == 3) && (linha == 0 && coluna == 0)) || ((mov == 2 || mov == 3) && (linha == 4 && coluna == 0)) || ((mov == 2 || mov == 4) && (linha == 4 &&  coluna == 4)) || ((mov == 1 || mov == 4) && (linha == 0 && coluna == 4)))
                     {
+                        linha =0;
+                        coluna=0;
+                        for (i = 0; i<5; i++)
+                        {
+                            for (j = 0; j<5; j++)
+                        {
+                         mapa[i][j] = mapa_default[i][j];    
+                         }  
+                         }
                         printf("Movivementacao invalida. Jogar novamente! \n");
                         break;
                     }
@@ -125,7 +134,7 @@ void main ()
                                 }
                                 else
                                 {
-                                    printf("Opcao invalida!");
+                                    printf("Opcao indisponivel!");
                                     break;
                                 }
                             }
@@ -135,8 +144,8 @@ void main ()
                 break;
             case 2:
                 printf("Posicao atual: (%d, %d)\n", linha, coluna);
-                printf("Vida: %d\n", life);
-                printf("Movimentos realizados: %d\n", estatisticas[0]);
+                printf("Vida: %d\n", vida);
+                printf("Movimentos feitos: %d\n", estatisticas[0]);
                 printf("Ouros encontrados: %d\n", estatisticas[1]);
                 printf("Bombas encontradas: %d\n", estatisticas[2]);
                 break;
@@ -151,128 +160,113 @@ void main ()
                         }
                         else
                         {
-                            printf("%d ", map[i][j]);
+                            printf("%d ", mapa[i][j]);
                         }
                     }
                     printf("\n");
                 }
                 break;
             default:
-                printf("Opção inválida!\n");
+                printf("Opção indisponivel!\n");
         }
 
-        if(map[linha][coluna] == 1)
+        if(mapa[linha][coluna] == 1)
         {
         if (linha == 0 && coluna == 2) 
         {
             estatisticas[1] += 1;
-            map[0][2] = 0;
+            mapa[0][2] = 0;
         }
         else
         {
             if (linha == 1 && coluna == 3)
             {
                estatisticas[1] += 1; 
-               map[1][3] = 0;
+               mapa[1][3] = 0;
             }
             else
             {
                 if (linha == 2 && coluna == 0)
                 {
                     estatisticas[1] += 1;
-                    map[2][0] = 0;
+                    mapa[2][0] = 0;
                 }
                 else
                 {
                     if (linha == 3 && coluna == 3)
                     {
                         estatisticas[1] += 1;
-                        map[3][3] = 0;
+                        mapa[3][3] = 0;
                     }
                     else
                     {
                         if (linha == 4 && coluna == 1)
                         {
                             estatisticas[1] += 1;
-                            map[4][1] = 0;
+                            mapa[4][1] = 0;
                         }
                     }
                 }
             }
         }
     }
-        if (map[linha][coluna] == 2)
+        if (mapa[linha][coluna] == 2)
         {
-            if (linha == 0 && coluna == 4) 
-        {
-            life -= 35;
+            vida -= 35;
+            if (vida<0)
+            {
+                vida = 0;
+            }
+            printf("BOOOM!! você pisou em uma bomba\n Vida restante = %d \n", vida);
             dano += 35;
             estatisticas[2] += 1;
-            map[0][4] = 0;
+            mapa[linha][coluna] = 0;
         }
-        else
+    if (mapa[linha][coluna]==3)
         {
-            if (linha == 1 && coluna == 1)
+            printf("==========================================\n");
+            printf("   PARABÉNS VOCẼ CONSEGUIU ATRAVESSAR!!!\n");
+            printf("==========================================\n");
+
+
+            printf("Quantidade de movimentos feitos:%d\n", estatisticas[0]);
+            printf("Quantidade de ouro pego:%d\n", estatisticas[1]);
+            printf("Quantidade de dano tomado:%d\n", dano);
+            printf("Quantidade de bombas encontradas:%d\n", estatisticas[2]);
+            do
             {
-                life -= 35;
-                dano += 35;
-                estatisticas[2] += 1;
-                map[1][1] = 0;
-            }
-            else
-            {
-                if (linha == 2 && coluna == 4)
+                printf("Digite 1 para retornar ao menu: \n");
+
+                if(scanf("%d", &opcao)!=1)
                 {
-                    life -= 35;
-                    dano += 35;
-                    estatisticas[2] += 1;
-                    map[2][4] = 0;
+                    printf("Opção indisponivel tente novamente\n");
+                    opcao =0;
                 }
                 else
                 {
-                    if (linha == 3 && coluna == 2)
+                    if(opcao!=1)
                     {
-                        life -= 35;
-                        dano += 35;
-                        estatisticas[2] += 1;
-                        map[3][2] = 0;
+                        printf("Opção indisponivel tente novamente\n");
                     }
                 }
-            }
-        }
-        
-    }
-    if (map[linha][coluna]==3)
-        {
-            printf("==============================\n");
-            printf("   PARABÉNS VOCẼ VENCEU!!!\n");
-            printf("==============================\n");
 
+            }while (opcao!=1);
 
-            printf("Quantidade de passos dados:%d\n", estatisticas[0]);
-            printf("Quantidade de ouro pego:%d\n", estatisticas[1]);
-            printf("Quantidade de dano sofrido:%d\n", dano);
-            printf("Quantidade de bombas encontradas:%d\n", estatisticas[2]);
-            
-            printf("Pressione enter para voltar ao menu\n");
-            getchar();
-            getchar();
-
-            //Restaurar mapa
+            //Restaurar mapa para o mapa padrão
             for (i = 0; i<5; i++)
             {
                 for (j = 0; j<5; j++)
                 {
-                    map[i][j] = map_default[i][j];    
+                    mapa[i][j] = mapa_default[i][j];    
                 }
             }
 
-        //Restaurar posição do jogador
+        //Restaurar posição do jogador para a posição inicial
         linha = 0;
         coluna = 0;
 
-        // Restaurar Vida
-        life=100;
+        // Voltar a vida cheia
+        vida=100;
 
         //Restaurar a Variavel de dano recebido
         dano=0;
@@ -283,33 +277,48 @@ void main ()
         estatisticas[2]=0;
             continue;
         }
-    if (life <= 0)
+    if (vida <= 0)
     {
-        life = 0;
+        vida = 0;
         printf("===============================\n");
         printf("          Game Over!\n");
         printf("===============================\n");
-        printf("Quantidade de passos dados:%d\n", estatisticas[0]);
+        printf("Quantidade de movimentos feitos:%d\n", estatisticas[0]);
         printf("Quantidade de ouro pego:%d\n", estatisticas[1]);
         printf("Quantidade de dano sofrido:%d\n", dano);
         printf("Quantidade de bombas encontradas:%d\n", estatisticas[2]);
             
-        printf("Voltar ao menu\n");
-        getchar();
-        getchar();
+            do
+            {
+                printf("Digite 1 para retornar ao menu: \n");
+
+                if(scanf("%d", &opcao)!=1)
+                {
+                    printf("Opção indisponivel tente novamente\n");
+                    opcao =0;
+                }
+                else
+                {
+                    if(opcao!=1)
+                    {
+                        printf("Opção indisponivel tente novamente\n");
+                    }
+                }
+
+            }while (opcao!=1);
 
         for (i = 0; i<5; i++)
             {
                 for (j = 0; j<5; j++)
                 {
-                   map[i][j] = map_default[i][j];    
+                   mapa[i][j] = mapa_default[i][j];    
                 }
             }
 
         linha = 0;
         coluna = 0;
 
-        life=100;
+        vida=100;
 
         dano=0;
 
@@ -321,3 +330,9 @@ void main ()
     }
     }while(true);
 }
+
+/* cima linha -1
+esquerda coluna -1
+direita coluna 5
+baixo linha 5
+*/
