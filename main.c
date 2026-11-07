@@ -95,10 +95,10 @@ void main()
             printf("          O JOGO FOI ENCERRADO!           \n");
             printf("==========================================\n");
 
-            printf("Quantidade de movimentos feitos:%d\n", estatisticas[0]);
-            printf("Quantidade de ouro pego:%d\n", estatisticas[1]);
-            printf("Quantidade de dano tomado:%d\n", dano);
-            printf("Quantidade de bombas encontradas:%d\n\n", estatisticas[2]);
+            printf("Quantidade de movimentos feitos: %d\n", estatisticas[0]);
+            printf("Quantidade de ouro pego: %d\n", estatisticas[1]);
+            printf("Quantidade de dano tomado: %d\n", dano);
+            printf("Quantidade de bombas encontradas: %d\n\n", estatisticas[2]);
             break;
         }
 
@@ -237,7 +237,8 @@ void main()
         if (mapa[linha][coluna] == 4)
         {
             vida += 20;
-            printf("Parabens você encontrou uma cura, vida atual: %d", vida);
+            printf("Parabens você encontrou uma cura. Vida atual: %d", vida);
+            mapa[linha][coluna] = 0;
         }
         if (mapa[linha][coluna] == 2)
         {
@@ -246,7 +247,7 @@ void main()
             {
                 vida = 0;
             }
-            printf("BOOOM!! você pisou em uma bomba\n Vida restante = %d \n", vida);
+            printf("\nBOOOM!! você pisou em uma bomba.\nVida restante = %d \n", vida);
             dano += 35;
             estatisticas[2] += 1;
             mapa[linha][coluna] = 0;
@@ -257,27 +258,19 @@ void main()
             printf("   PARABÉNS VOCẼ CONSEGUIU ATRAVESSAR!!!\n");
             printf("==========================================\n");
 
-            printf("Quantidade de movimentos feitos:%d\n", estatisticas[0]);
-            printf("Quantidade de ouro pego:%d\n", estatisticas[1]);
-            printf("Quantidade de dano tomado:%d\n", dano);
-            printf("Quantidade de bombas encontradas:%d\n", estatisticas[2]);
+            printf("Quantidade de movimentos feitos: %d\n", estatisticas[0]);
+            printf("Quantidade de ouro pego: %d\n", estatisticas[1]);
+            printf("Quantidade de dano tomado: %d\n", dano);
+            printf("Quantidade de bombas encontradas: %d\n", estatisticas[2]);
             do
             {
-                printf("Digite 1 para retornar ao menu: \n");
-
-                if (scanf("%d", &opcao) != 1)
+                printf("\nDigite 1 para retornar ao menu: ");
+                scanf("%d", &opcao);
+                if (opcao != 1)
                 {
-                    printf("Opção indisponivel tente novamente\n");
+                    printf("\n\nOpção indisponivel tente novamente!\n\n");
                     opcao = 0;
                 }
-                else
-                {
-                    if (opcao != 1)
-                    {
-                        printf("Opção indisponivel tente novamente\n");
-                    }
-                }
-
             } while (opcao != 1);
 
             // Restaurar mapa para o mapa padrão
@@ -308,31 +301,23 @@ void main()
         if (vida <= 0)
         {
             vida = 0;
-            printf("===============================\n");
+            printf("\n===============================\n");
             printf("          Game Over!\n");
             printf("===============================\n");
-            printf("Quantidade de movimentos feitos:%d\n", estatisticas[0]);
-            printf("Quantidade de ouro pego:%d\n", estatisticas[1]);
-            printf("Quantidade de dano sofrido:%d\n", dano);
-            printf("Quantidade de bombas encontradas:%d\n", estatisticas[2]);
+            printf("Quantidade de movimentos feitos: %d\n", estatisticas[0]);
+            printf("Quantidade de ouro pego: %d\n", estatisticas[1]);
+            printf("Quantidade de dano sofrido: %d\n", dano);
+            printf("Quantidade de bombas encontradas: %d\n", estatisticas[2]);
 
             do
             {
-                printf("Digite 1 para retornar ao menu: \n");
-
-                if (scanf("%d", &opcao) != 1)
+                printf("\nDigite 1 para retornar ao menu: ");
+                scanf("%d", &opcao);
+                if (opcao != 1)
                 {
-                    printf("Opção indisponivel tente novamente\n");
+                    printf("\n\nOpção indisponivel tente novamente!\n\n");
                     opcao = 0;
                 }
-                else
-                {
-                    if (opcao != 1)
-                    {
-                        printf("Opção indisponivel tente novamente\n");
-                    }
-                }
-
             } while (opcao != 1);
 
             for (i = 0; i < 5; i++)
@@ -357,9 +342,3 @@ void main()
         }
     } while (true);
 }
-
-/* cima linha -1
-esquerda coluna -1
-direita coluna 5
-baixo linha 5
-*/
