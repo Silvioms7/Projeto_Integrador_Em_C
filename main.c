@@ -60,11 +60,11 @@ void main()
     // estatisticas[1] -> quantidade de ouros encontrados
     // estatisticas[2] -> quantidade de bombas encontradas
 
-    printf("Parabens forasteiro\n");
+    printf("\n\nParabens forasteiro\n");
     printf("Você chegou nas catacumbas da matriz\n");
     printf("Atravesse a sala se conseguir\n");
     printf("Mas cuidado pois cada piso é uma surpresa, podendo conter bombas, ouro, ou uma cura\n");
-    printf("Boa sorte!!");
+    printf("Boa sorte!!\n");
     for (i = 0; i < 5; i++)
     {
         for (j = 0; j < 5; j++)
@@ -89,7 +89,16 @@ void main()
 
         if (opcao == 4)
         {
-            printf("Encerrando o jogo...");
+            printf("Encerrando o jogo...\n\n");
+
+            printf("==========================================\n");
+            printf("          O JOGO FOI ENCERRADO!           \n");
+            printf("==========================================\n");
+
+            printf("Quantidade de movimentos feitos:%d\n", estatisticas[0]);
+            printf("Quantidade de ouro pego:%d\n", estatisticas[1]);
+            printf("Quantidade de dano tomado:%d\n", dano);
+            printf("Quantidade de bombas encontradas:%d\n\n", estatisticas[2]);
             break;
         }
 
@@ -104,7 +113,7 @@ void main()
             scanf("%d", &mov);
             if (((mov == 1 || mov == 3) && linha == 0 && coluna == 0) || ((mov == 1 || mov == 4) && linha == 0 && coluna == 4) || ((mov == 1 && linha == 0 && coluna >= 0) || ((mov == 3) && linha == 4 && coluna == 0) || ((mov == 3) && linha >= 0 && coluna == 0)) || ((mov == 4 || mov == 2) && linha == 4 && coluna == 4) || ((mov == 2) && linha == 4 && coluna >= 0) || ((mov == 4) && coluna == 4 && linha >= 4))
             {
-                printf("Movivementacao invalida. Jogar novamente! \n");
+                printf("\nMovivementacao invalida. Jogar novamente! \n");
                 break;
             }
             else
@@ -150,17 +159,22 @@ void main()
             }
             break;
         case 2:
+            printf("\n############## STATUS ##############\n");
             printf("Posicao atual: (%d, %d)\n", linha, coluna);
             printf("Vida: %d\n", vida);
             printf("Movimentos feitos: %d\n", estatisticas[0]);
             printf("Ouros encontrados: %d\n", estatisticas[1]);
             printf("Bombas encontradas: %d\n", estatisticas[2]);
+            printf("####################################\n");
             break;
         case 3:
+            printf("---------------\n");
             for (i = 0; i < 5; i++)
             {
+                printf("|  ");
                 for (j = 0; j < 5; j++)
                 {
+
                     if (i == linha && j == coluna)
                     {
                         printf("P ");
@@ -170,8 +184,10 @@ void main()
                         printf("%d ", mapa_jogador[i][j]);
                     }
                 }
+                printf(" |");
                 printf("\n");
             }
+            printf("---------------");
             break;
         default:
             printf("Opção indisponivel!\n");
