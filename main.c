@@ -111,7 +111,7 @@ void main()
             printf("4 - Direita\n");
             printf("\nEscolha uma opcao: ");
             scanf("%d", &mov);
-            if (((mov == 1 || mov == 3) && linha == 0 && coluna == 0) || ((mov == 1 || mov == 4) && linha == 0 && coluna == 4) || ((mov == 1 && linha == 0 && coluna >= 0) || ((mov == 3) && linha == 4 && coluna == 0) || ((mov == 3) && linha >= 0 && coluna == 0)) || ((mov == 4 || mov == 2) && linha == 4 && coluna == 4) || ((mov == 2) && linha == 4 && coluna >= 0) || ((mov == 4) && coluna == 4 && linha >= 4))
+            if (((mov == 1 || mov == 3) && linha == 0 && coluna == 0) || ((mov == 1 || mov == 4) && linha == 0 && coluna == 4) || ((mov == 1 && linha == 0 && coluna >= 0) || ((mov == 3) && linha == 4 && coluna == 0) || ((mov == 3) && linha >= 0 && coluna == 0)) || ((mov == 4 || mov == 2) && linha == 4 && coluna == 4) || ((mov == 2) && linha == 4 && coluna >= 0) || ((mov == 4) && coluna == 4 && linha >= 0))
             {
                 printf("\nMovivementacao invalida. Jogar novamente! \n");
                 break;
